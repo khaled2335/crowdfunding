@@ -27,7 +27,7 @@ class projectcontroller extends Controller
         //     echo $titles->user_id . '<br>'; 
         // }
         if ($data) {
-            return response()->json(['user_data' => $data]);
+            return response()->json( $data);
         }
         else {
             return response()->json(['massege'=>' fail (wronge id)']);

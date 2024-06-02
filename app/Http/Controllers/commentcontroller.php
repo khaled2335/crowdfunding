@@ -132,9 +132,21 @@ public function success(Request $request)
             $backer->project_id = $response['L_PAYMENTREQUEST_0_DESC0'];
             $backer->reward_id = $response['L_PAYMENTREQUEST_0_NAME0'];
             $res = $backer->save();
+            $projects = Project::get();
+
+            foreach ($projects as $project) {
+                // Get backers for this project
+                $backers = Backer::where('project_id', $project->id)->get();
+        
+                // Calculate total collected money for this project
+                $collected_money = $backers->sum('pledge_amount');
+        
+                // Update or create project record with collected money
+                $project->update(['collected_money' => $collected_money]);
+            }
+        
             dd('success payment.');
-             
-    }
+        }
     else {
         dd('Please try again later.');
     }
@@ -145,9 +157,6 @@ public function success(Request $request)
 
 
 }
-
-
-
 
 
 
