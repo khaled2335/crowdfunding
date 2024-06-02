@@ -1,0 +1,107 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+.login {
+  padding-top: 150px;
+  padding-bottom: 150px;
+  background: #41295a;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #2F0743, #41295a);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #2F0743, #41295a);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  flex-wrap: nowrap;
+}
+
+.inp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  color: var(--color-text);
+  margin-top: 15px;
+}
+
+.input2 input,
+.input5 input,
+.input3 input {
+  background-color: var(--color-white);
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  color: var(--color-text-two);
+  padding: 10px 5px;
+  border: none;
+}
+
+.input4 a {
+  text-decoration: none;
+  color: var(--color-text);
+}
+
+.input4 a:hover {
+  color: var(--color-white);
+}
+
+.input5 input {
+  background-color: var(--color-text);
+  color: var(--color-white);
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.input5 input:hover {
+  background-color: var(--color-text-two);
+  color: var(--color-text);
+}
+
+.input7,
+.input8 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  text-align: center;
+  cursor: pointer;
+}
+
+.input7 input,
+.input8 input {
+  background-color: transparent;
+  border: none;
+  color: var(--color-text-three);
+  font-size: 20px;
+  font-weight: bold;
+  display: inline;
+  margin-left: 10px;
+}
+
+.input7 {
+  background-color: var(--color-white);
+  border: 3px solid var(--back-footers);
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.input8 {
+  background-color: #3D5A98;
+  padding: 10px ;
+  border: 1px solid var(--back-footers);
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.input8 input{
+  color: var(--color-white);
+}
