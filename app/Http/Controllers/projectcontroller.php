@@ -110,7 +110,21 @@ class projectcontroller extends Controller
     return response()->json(['message'=>'project updated succfully','user_data' => $project]);
 
 }
+
 }
+
+    function acceptince($id) {
+        $project = Project::find($id);
+        $project->acceptans = 1;
+        $project->save();
+        return response()->json(['message'=>'project updated succfully']);
+    }
+    function investing($id) {
+        $project = Project::find($id);
+        $project->investing = 1;
+        $project->save();
+        return response()->json(['message'=>'project updated succfully']);
+    }
 
      public function deleteproject($id)
      {

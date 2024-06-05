@@ -45,6 +45,8 @@ Route::post('deleteproject/{id}', [projectcontroller::class , 'deleteproject'])-
 Route::get('decrease', [projectcontroller::class , 'decrease'])->name('date.decrease');
 Route::get('allproject', [projectcontroller::class , 'allproject'])->name('project.allproject');
 Route::get('collectedmoney', [projectcontroller::class , 'collectedmoney'])->name('project.collectedmoney');
+Route::post('acceptince/{id}', [projectcontroller::class , 'acceptince'])->name('project.acceptince');
+Route::post('investing/{id}', [projectcontroller::class , 'investing'])->name('project.investing');
 
 //#############################Projects_routes###############################/ 
 
