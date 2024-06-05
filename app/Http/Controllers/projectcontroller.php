@@ -125,6 +125,12 @@ class projectcontroller extends Controller
         $project->save();
         return response()->json(['message'=>'project updated succfully']);
     }
+    function investingdelete($id) {
+        $project = Project::find($id);
+        $project->investing = 0;
+        $project->save();
+        return response()->json(['message'=>'project updated succfully']);
+    }
 
      public function deleteproject($id)
      {
