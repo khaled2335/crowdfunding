@@ -127,7 +127,7 @@ public function success(Request $request)
 
     if (in_array(strtoupper($response['ACK']), ['SUCCESS', 'SUCCESSWITHWARNING'])) {
        
-          dd($response);
+        //  dd($response);
             $backer = new Backer;
             $backer->pledge_amount = $response['PAYMENTREQUEST_0_AMT'];
             $backer->user_id = $response['PAYMENTREQUEST_0_INVNUM'];
