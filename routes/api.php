@@ -91,3 +91,4 @@ Route::get('search_project', [projectcontroller::class , 'search_project'])->nam
 Route::get('search_backer', [projectcontroller::class , 'search_backer'])->name('search_backer.view'); 
 Route::get('search_complaint', [projectcontroller::class , 'search_complaint'])->name('search_complaint.view'); 
 Route::get('search_reward', [rewardcontroller::class , 'search_reward'])->name('search_reward.view'); 
+##################################investor route###############################

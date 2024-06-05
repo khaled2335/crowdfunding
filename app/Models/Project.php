@@ -20,7 +20,9 @@ class Project extends Model
         'collected_money',
         'start_date',
         'end_date',
-        'category'
+        'category',
+        'investing',
+
         ];
 
     

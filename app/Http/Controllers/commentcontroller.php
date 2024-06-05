@@ -9,6 +9,8 @@ use App\Models\Complain;
 use App\Models\Reward;
 use Illuminate\Http\Request;
 use Srmklive\PayPal\Services\ExpressCheckout;
+use Illuminate\Support\Facades\DB;
+
 
 class commentcontroller extends Controller
 {
@@ -125,7 +127,7 @@ public function success(Request $request)
 
     if (in_array(strtoupper($response['ACK']), ['SUCCESS', 'SUCCESSWITHWARNING'])) {
        
-        //  dd($response);
+          dd($response);
             $backer = new Backer;
             $backer->pledge_amount = $response['PAYMENTREQUEST_0_AMT'];
             $backer->user_id = $response['PAYMENTREQUEST_0_INVNUM'];
@@ -144,6 +146,19 @@ public function success(Request $request)
                 // Update or create project record with collected money
                 $project->update(['collected_money' => $collected_money]);
             }
+
+            $projects = Project::all();
+
+            // Loop through each project
+            foreach ($projects as $project) {
+                // Count the number of backers for this project
+                $num_backers = $project->backers()->count();
+                
+                // Update the backers_count attribute
+                $project->backers_count = $num_backers;
+                $project->save();
+            }
+
         
             dd('success payment.');
         }
