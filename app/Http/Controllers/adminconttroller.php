@@ -8,9 +8,10 @@ use Hash;
 use Session;
 use Validator;
 use Illuminate\Support\Facades\Auth;
-
+use App\Notifications\EmailVerificationNotification;
 class adminconttroller extends Controller
 {
+    
     public function _constract()
     {
         $this->middleware('auth')->except(['registirationform','registiration','loginform']);
@@ -58,6 +59,7 @@ class adminconttroller extends Controller
         $user->password = Hash::make($request->password);
         $res = $user->save();
         if ($res) {
+            $user->notify( new EmailVerificationNotification());
            return response()->json(['massege'=>'regestration successfully']);
         }
         else {

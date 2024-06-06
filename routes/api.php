@@ -22,7 +22,7 @@ use Illuminate\Routing\RouteGroup;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::group (["middleware"=>['check_password_api']],function(){
+Route::group (["middleware"=>['check_password_api']],function(){});
 
 Route::post('login', [adminconttroller::class , 'loginn'])->name('login.login')->middleware('logintokin');
 Route::post('logoutt', [adminconttroller::class , 'logoutt'])->name('logoutt.user')->middleware('logintokin');
@@ -93,5 +93,5 @@ Route::get('search_user', [adminconttroller::class , 'search_user'])->name('sear
 Route::get('search_project', [projectcontroller::class , 'search_project'])->name('search_project.view'); 
 Route::get('search_backer', [projectcontroller::class , 'search_backer'])->name('search_backer.view'); 
 Route::get('search_complaint', [projectcontroller::class , 'search_complaint'])->name('search_complaint.view'); 
-Route::get('search_reward', [rewardcontroller::class , 'search_reward'])->name('search_reward.view'); });
+Route::get('search_reward', [rewardcontroller::class , 'search_reward'])->name('search_reward.view'); 
 ##################################investor route###############################

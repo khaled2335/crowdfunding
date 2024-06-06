@@ -181,6 +181,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Srmklive\PayPal\Providers\PayPalServiceProvider::class,
+        
         // Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
@@ -196,7 +197,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+        Ichtrojan\Otp\OtpServiceProvider::class,
     ],
 
     /*
@@ -212,7 +214,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
-         'JWTAuth' => 'Tymon\JWTAuth\Facades\JWTAuth'
+         'JWTAuth' => 'Tymon\JWTAuth\Facades\JWTAuth',
+         'Otp' => Ichtrojan\Otp\Otp::class,
     ])->toArray(),
-   
+    
 ];
