@@ -6,6 +6,7 @@ use App\Http\Controllers\adminconttroller;
 use App\Http\Controllers\projectcontroller;
 use App\Http\Controllers\commentcontroller;
 use App\Http\Controllers\rewardcontroller;
+use Illuminate\Routing\RouteGroup;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,12 +22,11 @@ use App\Http\Controllers\rewardcontroller;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::group (["middleware"=>['check_password_api']],function(){
 
 Route::post('login', [adminconttroller::class , 'loginn'])->name('login.login')->middleware('logintokin');
 Route::post('logoutt', [adminconttroller::class , 'logoutt'])->name('logoutt.user')->middleware('logintokin');
 Route::get('index', [adminconttroller::class , 'index'])->name('index.user');
-
-
 Route::post('update/{id}', [adminconttroller::class , 'update'])->name('user.update');
 Route::get('show/{id}', [adminconttroller::class , 'show'])->name('user.show');
 Route::post('delete/{id}', [adminconttroller::class , 'delete'])->name('user.delete');
@@ -93,5 +93,5 @@ Route::get('search_user', [adminconttroller::class , 'search_user'])->name('sear
 Route::get('search_project', [projectcontroller::class , 'search_project'])->name('search_project.view'); 
 Route::get('search_backer', [projectcontroller::class , 'search_backer'])->name('search_backer.view'); 
 Route::get('search_complaint', [projectcontroller::class , 'search_complaint'])->name('search_complaint.view'); 
-Route::get('search_reward', [rewardcontroller::class , 'search_reward'])->name('search_reward.view'); 
+Route::get('search_reward', [rewardcontroller::class , 'search_reward'])->name('search_reward.view'); });
 ##################################investor route###############################
