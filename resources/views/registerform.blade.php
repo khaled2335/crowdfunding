@@ -1,4 +1,4 @@
-<form action="{{route('user.registiration')}}" method="post" enctype="multipart/form-data">
+<form action="{{route('user.registirationweb')}}" method="post" enctype="multipart/form-data">
     @csrf
 <section className="login column col-12 overflow-hidden position-relative">
         <div className="inp input1 col-11 col-lg-3 col-md-6 col-sm-11">
@@ -7,6 +7,12 @@
         <div className="inp input2 col-11 col-lg-3 col-md-6 col-sm-11">
           <input className="col-12 " name="name" type="text" placeholder="Name" value="{{ old('name') }}" />
           @error('name')
+        <div class="alert alert-danger">{{ $message }}</div>
+         @enderror
+        </div>
+        <div className="inp input2 col-11 col-lg-3 col-md-6 col-sm-11">
+          <input className="col-12 " name="last_name" type="text" placeholder="last_name" value="{{ old('last_name') }}" />
+          @error('last_name')
         <div class="alert alert-danger">{{ $message }}</div>
          @enderror
         </div>

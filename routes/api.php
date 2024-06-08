@@ -6,6 +6,7 @@ use App\Http\Controllers\adminconttroller;
 use App\Http\Controllers\projectcontroller;
 use App\Http\Controllers\commentcontroller;
 use App\Http\Controllers\rewardcontroller;
+use App\Http\Controllers\EmailVerificationController;
 use Illuminate\Routing\RouteGroup;
 
 /*
@@ -21,8 +22,15 @@ use Illuminate\Routing\RouteGroup;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+
 });
 Route::group (["middleware"=>['check_password_api']],function(){});
+Route::group (["middleware"=>['auth:sanctum']],function(){
+    // Route::post('email_verification', [adminconttroller::class , 'email_verification'])->name('user.email_verification');
+
+});
+Route::post('email_verification', [EmailVerificationController::class , 'email_verification']);
+Route::get('resend_verification_code/{id}', [EmailVerificationController::class , 'resend_verification_code']);
 
 Route::post('login', [adminconttroller::class , 'loginn'])->name('login.login')->middleware('logintokin');
 Route::post('logoutt', [adminconttroller::class , 'logoutt'])->name('logoutt.user')->middleware('logintokin');

@@ -27,15 +27,17 @@ Route::get('edit/{id}', [adminconttroller::class , 'edit'])->name('user.edit');
 });
 
 
-
-
+Route::post('loginweb', [adminconttroller::class , 'loginnweb'])->name('login.login');
+Route::post('registirationweb', [adminconttroller::class , 'registirationweb'])->name('user.registirationweb');
+Route::get('loginform', [adminconttroller::class , 'loginform'])->name('loginform.user');
+Route::get('registerationform', [adminconttroller::class , 'registirationform'])->name('user.registirationform');
+Route::post('logout', [adminconttroller::class , 'logout'])->name('user.logout');
 
 
 
 
 Route::prefix('user')->middleware(['guest', 'web'])->group(function () {
-
-Route::get('registerationform', [adminconttroller::class , 'registirationform'])->name('user.registirationform');
+ 
 //Route::post('registeration', [adminconttroller::class , 'registiration'])->name('user.registiration');
 
 
@@ -51,4 +53,4 @@ Route::prefix('admin')->group(function () {
 
 });
 
-Route::get('loginform', [adminconttroller::class , 'loginform'])->name('loginform.user');
+

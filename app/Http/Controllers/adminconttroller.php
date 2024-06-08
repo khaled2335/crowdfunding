@@ -4,18 +4,24 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Project;
 use Illuminate\Http\Request;
-use Hash;
+use Illuminate\Support\Facades\Hash;
 use Session;
 use Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use App\Notifications\EmailVerificationNotification;
+use App\Http\Requests\emailverifictionrequest;
+use Otp;
 class adminconttroller extends Controller
 {
-    
+    private $otp;
     public function _constract()
     {
-        $this->middleware('auth')->except(['registirationform','registiration','loginform']);
+         $this->middleware('auth')->except(['registirationform','registiration','loginform']);
+       
     }
+    
+    
     public function index()
     {
        $data = User::get();
@@ -57,10 +63,46 @@ class adminconttroller extends Controller
         $user->last_name = $request->last_name;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
+         $res = $user->save();
+        Notification::send($user ,new EmailVerificationNotification() );
+       
+        if ($res) {
+
+            //   $user->notify( new EmailVerificationNotification());
+           return response()->json(['massege'=>'regestration successfully']);
+        }
+        else {
+            return response()->json(['massege'=>'regestration fail']);
+        }
+        
+         }
+
+       public function registirationform(){
+            
+            return view('registerform');
+
+
+
+         } 
+    public function registirationweb(Request $request)
+    {
+     
+
+        $request->validate([
+            'name'=>'required',
+            'last_name'=>'required',
+            'email'=>'required |  email',
+            'password'=>'required|min:6',
+            
+        ]);
+        $user = new User;
+        $user->name = $request->name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
         $res = $user->save();
         if ($res) {
-            $user->notify( new EmailVerificationNotification());
-           return response()->json(['massege'=>'regestration successfully']);
+           return view('dashboard');
         }
         else {
             return response()->json(['massege'=>'regestration fail']);
@@ -68,6 +110,7 @@ class adminconttroller extends Controller
         
           
     }
+
     public function userphoto(Request $request , $id)
     {
         $image_name = rand() . '.' .$request->profile_photo->getClientOriginalExtension(); 
@@ -97,6 +140,26 @@ class adminconttroller extends Controller
             }
          
            
+        }
+    public function loginform(Request $request)
+    {
+        return view('loginform');
+         
+           
+        }
+        public function loginnweb(Request $request)
+        {
+            // Retrieve email and password from the request
+                // Validate the user's login credentials
+            $credentials = $request->only('email', 'password');
+
+            if (Auth::attempt($credentials)) {
+                // Authentication successful, redirect to the dashboard or any other page
+                return redirect()->intended('/dashboard');
+            } else {
+                // Authentication failed, redirect back with an error message
+                return redirect()->back()->withInput()->withErrors(['email' => 'Invalid email or password']);
+            }
         }
   
     public function adduser(Request $request)
@@ -145,23 +208,10 @@ public function logout()
 {
     session()->flush();
     Auth::logout();
-    return redirect()->route('loginform.user');;
+    return view('loginform');;
 }
-public function admin()
-{
-    
-    return view('dashboard');
 
-}
-public function logoutt(Request $request )
-{
-   
-    $request->user()->currentAccessToken()->delete();
 
-        return response()->json(['message' => 'Logout successful']);
-    
-
-}
 public function delete($id)
 {
    $user = User::find($id);

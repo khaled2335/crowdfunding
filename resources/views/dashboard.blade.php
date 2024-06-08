@@ -12,9 +12,9 @@
 
      
      
-    <a href="">users</a><br>
-    <a href="{{route('logout.user')}}">logout</a><br>
-    <a href="{{route('user.edit',auth()->user()->id)}}">edit</a><br>
+
+    <a href="{{route('user.logout')}}">logout</a><br>
+   
  
 </body>
 </html>

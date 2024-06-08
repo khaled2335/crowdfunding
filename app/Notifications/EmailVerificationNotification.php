@@ -6,13 +6,14 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-use Otp;
+use Ichtrojan\Otp\Otp;
 class EmailVerificationNotification extends Notification
 {
     use Queueable;
     public $message;
     public $subject;
     public $fromemail;
+    public $mailer;
     private $otp;
     /**
      * Create a new notification instance.
@@ -22,6 +23,7 @@ class EmailVerificationNotification extends Notification
         $this->message = 'use this code to verification process';
         $this->subject = 'verification needed';
         $this->fromemail = 'test@khaled.com';
+        $this->mailer = 'smtp';
         $this->otp = new Otp;
     }
 
