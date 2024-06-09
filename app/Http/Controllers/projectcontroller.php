@@ -48,6 +48,7 @@ class projectcontroller extends Controller
             'photos'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:10048',
             'second_photo'=>'required|image|mimes:jpeg,png,jpg,gif,svg|max:10048',
             'videos' => 'required|mimes:mp4,ogx,oga,ogv,ogg,webm|max:30240',
+            'pdf' => 'required|mimes:pdf|max:20480', 
             ]);
         #project_photo
         $image_name = rand() . '.' .$request->photos->getClientOriginalExtension(); 
@@ -58,6 +59,9 @@ class projectcontroller extends Controller
         #project_video
         $video = rand() . '.' .$request->videos->getClientOriginalExtension(); 
         $request->videos->move(public_path('/videos'),$video);
+        
+        $pdf_name = rand() . '.' . $request->pdf->getClientOriginalExtension();
+        $request->pdf->move(public_path('/images/pdf'), $pdf_name);
 
         $the_user = User::find($user);
         $project = new Project;
@@ -67,6 +71,7 @@ class projectcontroller extends Controller
         $project->photos = asset('images/projectphoto/' . $image_name); 
         $project->second_photo = asset('images/projectsecondphoto/' . $secondeimage_name); 
         $project->videos = asset('videos/' . $video); 
+        $project->pdf = asset('pdfs/' . $pdf_name); 
         $project->goal_amount= $request->goal_amount;
         $project->end_date = $request->end_date;
         $project->category = $request->category;
