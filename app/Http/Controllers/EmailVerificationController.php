@@ -146,6 +146,19 @@ public function get_message_users()
 
     return response()->json(['messages' => $groupedMessages], 200);
 } 
+public function delete_message($message_id)
+{
+    // Find the message by its ID
+    $message = ChMessage::find($message_id);
+
+    if ($message) {
+        // Delete the message
+        $message->delete();
+        return response()->json(['message' => 'Message deleted successfully'], 200);
+    } else {
+        return response()->json(['error' => 'Message not found'], 404);
+    }
+}
 
     
 
