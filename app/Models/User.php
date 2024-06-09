@@ -28,8 +28,7 @@ class User extends Authenticatable implements JWTSubject
         'profile_photo',
         'National_id',
         'role',
-        'remember_token',
-        
+        'remember_token',  
     ];
     public function projects()
     {

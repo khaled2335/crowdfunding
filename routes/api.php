@@ -29,9 +29,20 @@ Route::group (["middleware"=>['auth:sanctum']],function(){
     // Route::post('email_verification', [adminconttroller::class , 'email_verification'])->name('user.email_verification');
 
 });
+############################email_verification########################################################
 Route::post('email_verification', [EmailVerificationController::class , 'email_verification']);
 Route::get('resend_verification_code/{id}', [EmailVerificationController::class , 'resend_verification_code']);
+Route::post('forgetPassword', [EmailVerificationController::class , 'forgetPassword']);
+Route::post('reset_password', [EmailVerificationController::class , 'reset_password']);
 
+############################ message ########################################################
+Route::post('send_message_from/{from_id}/{to_id}', [EmailVerificationController::class , 'send_message_from']);
+
+
+
+
+
+############################ user ########################################################
 Route::post('login', [adminconttroller::class , 'loginn'])->name('login.login')->middleware('logintokin');
 Route::post('logoutt', [adminconttroller::class , 'logoutt'])->name('logoutt.user')->middleware('logintokin');
 Route::get('index', [adminconttroller::class , 'index'])->name('index.user');
