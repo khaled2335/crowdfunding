@@ -54,7 +54,7 @@ class adminconttroller extends Controller
         $request->validate([
             'name'=>'required',
             'last_name'=>'required',
-            'email'=>'required |  email',
+            'email'=>'required |  email ',
             'password'=>'required|min:6',
             
         ]);

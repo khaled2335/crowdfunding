@@ -99,43 +99,70 @@ public function reset_password(resetpasswwordRequest $request) {
     $send_message->body  = $request->body;
     $res = $send_message->save();
     if ($res) {
-        notify()->success('there is message sent to you');
+        // notify()->success('there is message sent to you');
         return response()->json(['message' => 'Message sent successfully'], 200);
     } else {
         return response()->json(['error' => 'Failed to send message'], 500);
     }
 
 }
+ public function receve_message_from(Request $request ,$from_id, $to_id)  {
+    
+    // Fetch messages between the two users, ordered by the latest first
+    $query = ChMessage::where(function($query) use ($from_id, $to_id) {
+        $query->where('from_id', $from_id)
+              ->where('to_id', $to_id);
+    })->orWhere(function($query) use ($from_id, $to_id) {
+        $query->where('from_id', $to_id)
+              ->where('to_id', $from_id);
+    })->latest();
 
+    // Paginate the results
+    $messages = $query->paginate($request->per_page ?? 10);
 
+    // Prepare the response
+    $totalMessages = $messages->total();
+    $lastPage = $messages->lastPage();
+    $response = [
+        'total' => $totalMessages,
+        'last_page' => $lastPage,
+        'messages' => $messages->items(),
+    ];
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    return response()->json($response);
+}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
