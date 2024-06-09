@@ -12,6 +12,8 @@ namespace App\Http\Controllers;
     use Illuminate\Support\Facades\Hash;
     use Ichtrojan\Otp\Otp;
     use Illuminate\Http\Request;
+    use App\Events\MessageSent;
+
 
 class EmailVerificationController extends Controller
 {
@@ -99,7 +101,7 @@ public function reset_password(resetpasswwordRequest $request) {
     $send_message->body  = $request->body;
     $res = $send_message->save();
     if ($res) {
-        // notify()->success('there is message sent to you');
+        
         return response()->json(['message' => 'Message sent successfully'], 200);
     } else {
         return response()->json(['error' => 'Failed to send message'], 500);
@@ -131,6 +133,32 @@ public function reset_password(resetpasswwordRequest $request) {
 
     return response()->json($response);
 }
+
+public function get_message_users()
+{
+    // Retrieve all messages
+    $messages = ChMessage::get();
+
+    // Group messages by sender (from_id) and recipient (to_id)
+    $groupedMessages = $messages->groupBy(function ($message) {
+        return $message->from_id . '-' . $message->to_id;
+    });
+
+    return response()->json(['messages' => $groupedMessages], 200);
+} 
+
+    
+
+
+
+
+
+
+
+
+
+
+
 
 }
 

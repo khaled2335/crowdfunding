@@ -38,6 +38,7 @@ Route::post('reset_password', [EmailVerificationController::class , 'reset_passw
 ############################ message ########################################################
 Route::post('send_message_from/{from_id}/{to_id}', [EmailVerificationController::class , 'send_message_from']);
 Route::get('receve_message_from/{from_id}/{to_id}', [EmailVerificationController::class , 'receve_message_from']);
+Route::get('get_message_users', [EmailVerificationController::class , 'get_message_users']);
 
 
 
